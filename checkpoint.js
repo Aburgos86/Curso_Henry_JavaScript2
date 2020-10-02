@@ -11,8 +11,24 @@ function menorMayor(numeros) {
   // ya que 1 es el número más chico (menor) dentro del arreglo [4, 6, 1, 7, 15]
   // y 15 es el número más grande (mayor) dentro del arreglo [4, 6, 1, 7, 15]
 
-  // Tu código aca:
-
+  // Tu código acá:
+  var max = 0;
+  var min = numeros[0];
+  var result = [];
+ 	
+  for(let i=0;i<numeros.length;i++) {
+  	if(numeros[i] < min) {
+  	min = numeros[i];
+	}
+  }
+  for(let i=0;i<numeros.length;i++) {
+  	if(max < numeros[i]) {
+  	max = numeros[i];
+	}
+  }
+  result.push(min);
+  result.push(max);
+  return result;      
 }
 
 function stringMasLarga(strings) {
@@ -23,6 +39,17 @@ function stringMasLarga(strings) {
   // stringMasLarga(['JavaScript', 'HTML', 'CSS']); debe retornar 'JavaScript'
 
   // Tu código aca
+  var max = 0;
+   for(let i=0;i<strings.length;i++) {
+  	if(max < strings[i].length) {
+  	max = strings[i].length;
+	}
+  }
+   for(let i=0;i<strings.length;i++) {
+  	if(max === strings[i].length) {
+  	return strings[i];
+	}
+  }
 }
 
 function buscarAmigo(amigos, nombre) {
@@ -35,7 +62,13 @@ function buscarAmigo(amigos, nombre) {
   //  buscarAmigo(amigos, 'toni') debe devolver { nombre: 'toni', edad: 33 };
 
   // Tu código aca:
-  
+
+for (let i=0;i<amigos.length;i++) {
+  if(amigos[i].nombre === nombre) {
+	return amigos[i];
+}
+}
+
 }
 
 function sumArray(array, n) {
@@ -53,8 +86,16 @@ function sumArray(array, n) {
   // por lo tanto también debería devolver false en este caso
 
   // Tu código aca:
-
-
+for (let i=0;i<array.length;i++) {
+  	for (let a=0;a<array.length;a++) {
+		if(array[i] != array[a]) {
+  			if(array[i]+array[a] === n) {
+				return true;
+			}
+		}
+	}
+   }
+return false;
 };
 
 function pluck(array, propiedad) {
@@ -68,18 +109,33 @@ function pluck(array, propiedad) {
 
   // Tu código acá:
 
+var h = [];
+
+function check(elemento) {
+           h.push(elemento[propiedad]);
+	}
+array.map(check);
+return h;
 }
 
 // =======================================================================
 
 
 function crearClasePersona() {
+  var nombre = '';
+  var edad = 0;
+  var hobbies = [];
+  var amigos = [];
   class Persona {
     constructor(nombre, edad, hobbies, amigos) {
       // El constructor de la clase Persona recibe nombre (string), edad (integer), hobbies (array de strings), amigos (array de objetos)
       // Inicializar las propiedades de la persona con los valores recibidos como argumento
 
       // Tu código aca:
+      this.nombre = nombre;
+      this.edad = edad;
+      this.hobbies = hobbies;
+      this.amigos = amigos;
 
     }
 
@@ -89,7 +145,10 @@ function crearClasePersona() {
       // No debe retornar nada.
 
       // Tu código aca:
-
+       var j = {};
+       j['nombre'] = nombre;
+       j['edad'] = edad;
+       this.amigos.push(j);
     }
 
     addHobby(hobby) {
@@ -97,6 +156,8 @@ function crearClasePersona() {
       // No debe retornar nada.
 
       // Tu código aca:
+	
+	this.hobbies.push(hobby);
 
     }
     getFriends() {
@@ -107,6 +168,14 @@ function crearClasePersona() {
       // persona.getFriends() debería devolver ['martin', 'toni']
 
       // Tu código aca:
+	
+	 var h = [];
+
+function check(elemento) {
+           h.push(elemento.nombre);
+	}
+this.amigos.map(check);
+return h;
 
     }
 
@@ -116,6 +185,15 @@ function crearClasePersona() {
       // persona.getHobbies() debe devolver ['correr', 'dormir', 'nadar']
 
       // Tu código aca:
+	
+	var h = [];
+
+function check(elemento) {
+           h.push(elemento);
+	}
+this.hobbies.map(check);
+return h;
+	
 
     }
 
@@ -136,7 +214,14 @@ function crearClasePersona() {
 
       // Tu código aca:
 
-    }
+	var h = [];
+	for (let i=0;i<this.amigos.length;i++) {
+  		for (let a=0;a<this.amigos.length;a++) {
+		if(this.amigos[i].edad != this.amigos[a].edad) {	
+  			return (this.amigos[i].edad+this.amigos[a].edad)/2;
+		}
+  	 }
+    }}
   };
 
   return Persona;
